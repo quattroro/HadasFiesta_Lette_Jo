@@ -1,0 +1,29 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+///조민익 작업
+///투사체 공격 오브젝트
+///투사체 공격 스킬은 이후 추가 예정
+/////////////////////////////////////////////////////////////////////
+
+public class ProjectileObj : MonoBehaviour
+{
+    //데미지 판정 주기
+    public float DamageTime;
+
+    public string MonsterTag;
+
+    public SphereColl coll;
+
+    public void InitSetting(float _damageTime, string _monsterTag, SphereColl _coll)
+    {
+
+    }
+
+}
