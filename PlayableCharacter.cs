@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -127,15 +128,20 @@ public class PlayableCharacter : MonoBehaviour
         //UI가 존재하지 않는 경우 UI객체를 로드해서 생성시켜 준다.
         if (CharacterUIPanel == null)
         {
-            //if (UIManager.Instance != null)
-            //    CharacterUIPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUI, Canvas_Enum.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
-            //else
-            //    CharacterUIPanel = GameMG.Instance.Resource.Instantiate<UICharacterInfoPanel>(Global_Variable.CharVar.CharacterUI);
-
-            if(UIManager.Instance==null)
-                CharacterUIPanel = ResourceCreateDeleteManager.Instance.InstantiateObj<UICharacterInfoPanel>(Global_Variable.CharVar.CharacterUI);
-            else
-                CharacterUIPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUI, Canvas_Enum.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
+            try
+            {
+                if (UIManager.Instance != null)
+                    CharacterUIPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUI, Canvas_Enum.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
+                else
+                    CharacterUIPanel = GameMG.Instance.Resource.Instantiate<UICharacterInfoPanel>(Global_Variable.CharVar.CharacterUI);
+            }
+            catch (Exception e)
+            {
+                if (UIManager.Instance == null)
+                    CharacterUIPanel = ResourceCreateDeleteManager.Instance.InstantiateObj<UICharacterInfoPanel>(Global_Variable.CharVar.CharacterUI);
+                else
+                    CharacterUIPanel = UIManager.Instance.Prefabsload(Global_Variable.CharVar.CharacterUI, Canvas_Enum.CANVAS_NUM.player_cavas).GetComponent<UICharacterInfoPanel>();
+            }
 
         }
 
